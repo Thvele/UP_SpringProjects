@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск машин</title>
+</head>
+<body>
+    <a href="/car">Назад</a>
+
+    <div>
+        <div th:each="el: ${searchRes}">
+            <h2 th:text="'ID: ' + ${el.getId()}"></h2>
+            <p th:text="'Название машины: ' + ${el.getCarName()}"></p>
+            <p th:text="'Цвет: ' + ${el.getCarColor}"></p>
+            <p th:text="'Коробка передач: ' + ${el.getCarKPPType()}"></p>
+            <p th:text="'Цена: ' + ${el.getCarCost()} + ' руб.'"></p>
+            <p th:text="'Дата поступления в салон: ' + ${el.getCarDelivery()}"></p>
+        </div>
+    </div>
+</body>
+</html>

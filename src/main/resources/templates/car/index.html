@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<header>
+  <a href="/car">Таблица машин</a>
+  <a href="/employee">Таблица сотрудников</a>
+</header>
+<body>
+  <h1>Машины</h1>
+
+  <a href="/car/add">Дабвить машину</a><br>
+
+  <form action="/car/filterACCU" method="get">
+    <input name="search" type="text" placeholder="Точный поиск машин по имени">
+    <input type="submit" value="Найти">
+  </form>
+
+  <form action="/car/filter" method="get">
+    <input name="search" type="text" placeholder="Неточный поиск машин по имени">
+    <input type="submit" value="Найти">
+  </form>
+
+  <div>
+    <div th:each="el: ${list_cars}">
+      <h2 th:text="'ID: ' + ${el.getId()}"></h2>
+      <p th:text="'Название машины: ' + ${el.getCarName()}"></p>
+      <p th:text="'Цвет: ' + ${el.getCarColor}"></p>
+      <p th:text="'Коробка передач: ' + ${el.getCarKPPType()}"></p>
+      <p th:text="'Цена: ' + ${el.getCarCost()} + ' руб.'"></p>
+      <p th:text="'Дата поступления в салон: ' + ${el.getCarDelivery()}"></p>
+    </div>
+  </div>
+</body>
+</html>
