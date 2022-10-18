@@ -5,8 +5,10 @@ import com.example.P50519.Repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -31,21 +33,17 @@ public class CarController {
     }
 
     @GetMapping("/add")
-    public String CarAddView() {
+    public String CarAddView(Car car) {
         return ("car/carADD");
     }
 
     @PostMapping("/add")
-    public String CarAdd(Model model,
-                         @RequestParam String carName,
-                         @RequestParam String carColor,
-                         @RequestParam char carKPPType,
-                         @RequestParam Integer carCost,
-                         @RequestParam String carDelivery) {
+    public String CarAdd(@Valid Car car,
+                         BindingResult result) { //BindingResult - Передаёт ошибки на страницу
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        if(result.hasErrors())
+            return ("car/carADD");
 
-        Car car = new Car(carName, carColor, carKPPType, carCost, formatter.parse(carDelivery, new ParsePosition(0)));
         carRepository.save(car);
         return ("redirect:/car");
     }
@@ -54,68 +52,55 @@ public class CarController {
     public String CarFilterACCU(Model model,
                      @RequestParam(name = "search") String carName) {
 
-        List<Car> car = carRepository.findByCarName(carName);
-        model.addAttribute("searchRes", car);
-        return ("car/carFilter");
+        List<Car> car = carRepository.findByCarName(carName); //Добавляем все записи содержащие заданное значение в список
+        model.addAttribute("searchRes", car); //Передаём в модель список
+        return ("car/carFilter"); //Отображаем страницу поиска
     }
 
     @GetMapping("/filter")
     public String CarFilter(Model model,
                             @RequestParam(name = "search") String carName) {
 
-        List<Car> car = carRepository.findByCarNameContains(carName);
-        model.addAttribute("searchRes", car);
-        return ("car/carFilter");
+        List<Car> car = carRepository.findByCarNameContains(carName); //Добавляем все записи содержащие заданное значение в список
+        model.addAttribute("searchRes", car); //Передаём в модель список
+        return ("car/carFilter"); //Отображаем страницу поиска
     }
 
     @GetMapping("/details/{id}")
     public String CarDetails(Model model,
                              @PathVariable long id) {
 
-        Optional<Car> car = carRepository.findById(id);
-        ArrayList<Car> result = new ArrayList<>();
-
-        car.ifPresent(result::add);
-        model.addAttribute("car", result);
-        return ("/car/carDetails");
+        Car car = carRepository.findById(id).orElseThrow(); //Ищем запись по ID
+        model.addAttribute("car", car); //Передаём в модель запись
+        return ("/car/carDetails"); //Отображаем страницу деталей
     }
 
     @GetMapping("/carDEL/{id}")
     public String CarDelete(@PathVariable long id) {
 
-        carRepository.deleteById(id);
-        return("redirect:/car");
+        carRepository.deleteById(id); //Удаление записи по ID
+        return("redirect:/car"); //Перенаправление на страницу машин
     }
 
     @GetMapping("/edit/{id}")
     public String CarEdit(Model model,
-                          @PathVariable long id) {
+                          @PathVariable long id,
+                          Car car_) {
 
-        Car car = carRepository.findById(id).orElseThrow();
-        model.addAttribute("car", car);
-        return("/car/carEDT");
+        Car car = carRepository.findById(id).orElseThrow(); //Поиск записи по ID
+        model.addAttribute("car", car); //Передаём в модель запись
+        return("/car/carEDT"); //Отображение страницы редактирования
     }
 
     @PostMapping("/edit/{id}")
-    public String CarEdit(Model model,
-                          @PathVariable long id,
-                          @RequestParam String carName,
-                          @RequestParam String carColor,
-                          @RequestParam char carKPPType,
-                          @RequestParam Integer carCost,
-                          @RequestParam String carDelivery) {
+    public String CarEdit(@Valid Car car,
+                          BindingResult result) {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        if(result.hasErrors())
+            return ("car/carEDT");
 
-        Car car = carRepository.findById(id).orElseThrow();
-        car.setCarName(carName);
-        car.setCarColor(carColor);
-        car.setCarKPPType(carKPPType);
-        car.setCarCost(carCost);
-        car.setCarDelivery(formatter.parse(carDelivery, new ParsePosition(0)));
+        carRepository.save(car); //Сохранение изменений
 
-        carRepository.save(car);
-
-        return("redirect:/car/details/" + car.getId());
+        return("redirect:/car/details/" + car.getId()); //Перенаправление на страницу деталей
     }
 }

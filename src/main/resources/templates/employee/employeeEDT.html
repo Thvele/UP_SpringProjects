@@ -10,11 +10,20 @@
 <div th:each="el: ${employee}" style="padding: 5px; margin-left: 5px">
     <form method="post">
         <label>
-            <input name="surname" type="text" placeholder="Фамилия" th:value="${employee.surname}" class="form-control" style="min-width: 100px; width: 300px"> <br>
-            <input name="name" type="text" placeholder="Имя" th:value="${employee.name}" class="form-control" style="min-width: 100px; width: 300px"> <br>
-            <input name="middleName" type="text" placeholder="Отчество" th:value="${employee.middleName}" class="form-control" style="min-width: 100px; width: 300px"> <br>
-            <input name="passport" type="number" min="1000000000" max="9999999999" placeholder="Паспорт" th:value="${employee.passport}" class="form-control" style="min-width: 100px; width: 300px"> <br>
-            <input name="birthday" type="text" placeholder="гггг-мм-дд" th:value="${employee.birthday.toString().substring(0,10)}" maxlength="10" class="form-control" style="min-width: 100px; width: 300px"> <br><br>
+            <input th:field="*{employee.surname}" name="surname" type="text" placeholder="Фамилия" th:value="${employee.surname}" class="form-control" style="min-width: 100px; width: 300px">
+            <div th:if="${#fields.hasErrors('employee.surname')}" th:errors="*{employee.surname}" style="color: red"></div><br>
+
+            <input th:field="*{employee.name}" name="name" type="text" placeholder="Имя" th:value="${employee.name}" class="form-control" style="min-width: 100px; width: 300px">
+            <div th:if="${#fields.hasErrors('employee.name')}" th:errors="*{employee.name}" style="color: red"></div><br>
+
+            <input th:field="*{employee.middleName}" name="middleName" type="text" placeholder="Отчество" th:value="${employee.middleName}" class="form-control" style="min-width: 100px; width: 300px">
+            <div th:if="${#fields.hasErrors('employee.middleName')}" th:errors="*{employee.middleName}" style="color: red"></div><br>
+
+            <input th:field="*{employee.passport}" name="passport" type="text" maxlength="11" placeholder="Серия/номер паспорта (1111 111111)" th:value="${employee.passport}" class="form-control" style="min-width: 100px; width: 300px">
+            <div th:if="${#fields.hasErrors('employee.passport')}" th:errors="*{employee.passport}" style="color: red"></div><br>
+
+            <input th:field="*{employee.birthday}" name="birthday" type="text" placeholder="гггг-мм-дд" th:value="${employee.birthday}" class="form-control" style="min-width: 100px; width: 300px">
+            <div th:if="${#fields.hasErrors('employee.birthday')}" th:errors="*{employee.birthday}" style="color: red"></div><br><br>
 
             <input type="submit" value="Подтвердить" class="btn btn-info" style="margin-bottom: 5px">
         </label>

@@ -1,19 +1,15 @@
 package com.example.P50519.Controllers;
 
-import com.example.P50519.Models.Car;
 import com.example.P50519.Models.Employee;
 import com.example.P50519.Repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/employee")
@@ -30,18 +26,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public String EmployeeAddView() {return ("employee/employeeADD");}
+    public String EmployeeAddView(Employee employee) {return ("employee/employeeADD");}
 
     @PostMapping("/add")
-    public String EmployeeAdd(@RequestParam String surname,
-                              @RequestParam String name,
-                              @RequestParam String middleName,
-                              @RequestParam Integer passport,
-                              @RequestParam String birthday) {
+    public String EmployeeAdd(@Valid Employee employee,
+                              BindingResult result) {
+        if(result.hasErrors())
+            return ("employee/employeeADD");
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        Employee employee = new Employee(surname, name, middleName, passport, formatter.parse(birthday, new ParsePosition(0)));
         employeeRepository.save(employee);
         return ("redirect:/employee");
     }
@@ -90,21 +82,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/edit/{id}")
-    public String EmployeeEdit(@PathVariable long id,
-                          @RequestParam String surname,
-                          @RequestParam String name,
-                          @RequestParam String middleName,
-                          @RequestParam Integer passport,
-                          @RequestParam String birthday) {
+    public String EmployeeEdit(@Valid Employee employee,
+                               BindingResult result) {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-        Employee employee = employeeRepository.findById(id).orElseThrow();
-        employee.setSurname(surname);
-        employee.setName(name);
-        employee.setMiddleName(middleName);
-        employee.setPassport(passport);
-        employee.setBirthday(formatter.parse(birthday, new ParsePosition(0)));
+        if(result.hasErrors())
+            return ("employee/employeeEDT");
 
         employeeRepository.save(employee);
 
