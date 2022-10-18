@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee</title>
+    <title>Сотрудники</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <div th:insert="fragments/header :: headerMain"></div>
 </head>
-    <header>
-        <a href="/car">Таблица машин</a>
-        <a href="/employee">Таблица сотрудников</a>
-    </header>
-    <body>
-    <h1>Сотрудники</h1>
+<body style="background: lightgray">
 
-    <a href="/employee/add">Дабвить сотрудника</a><br>
-
-    <form action="/employee/filterACCU" method="get">
-        <input name="search" type="text" autocomplete="off" placeholder="Точный поиск по Фамилии">
-        <input type="submit" value="Найти">
+    <form class="row g-3" style="margin-left: 5px; margin-top: 10px" action="/car/filterACCU" method="get">
+        <div class="col-auto">
+            <input name="search" type="text" class="form-control" placeholder="Точный поиск фамилии" style="width: 300px">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Найти</button>
+        </div>
     </form>
 
-    <form action="/employee/filter" method="get">
-        <input name="search" type="text" autocomplete="off" placeholder="Неточный поиск по Фамилии">
-        <input type="submit" value="Найти">
+    <form class="row g-3" style="margin-left: 5px" action="/car/filter" method="get">
+        <div class="col-auto">
+            <input name="search" type="text" class="form-control" placeholder="Неточный поиск фамилии" style="width: 300px">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Найти</button>
+        </div>
     </form>
 
-    <div>
+    <div style="padding: 5px; margin-left: 5px">
         <div th:each="el: ${list_employee}">
             <h2 th:text="'ID: ' + ${el.getId()}"></h2>
-            <p th:text="'Фамилия: ' + ${el.getSurname()}"></p>
-            <p th:text="'Имя: ' + ${el.getName}"></p>
-            <p th:text="'Отчество: ' + ${el.getMiddleName()}"></p>
-            <p th:text="'Паспорт: ' + ${el.getPassport()}"></p>
-            <p th:text="'Дата рождения: ' + ${el.getBirthday()}"></p>
+            <p th:text="'ФИО: ' + ${el.getSurname()} + ' ' + ${el.getName} + ' '     + ${el.getMiddleName()}"></p>
+            <a th:href="'/employee/details/' + ${el.getId()}" class="btn btn-info">Подробнее</a>
         </div>
     </div>
     </body>

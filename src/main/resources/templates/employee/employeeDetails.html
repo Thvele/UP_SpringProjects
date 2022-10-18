@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подробнее</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <div th:insert="fragments/header :: headerMain"></div>
+</head>
+
+<body style="background: lightgray">
+<div>
+    <div th:each="el: ${employee}" style="padding: 5px; margin-left: 5px">
+        <h2 th:text="'ID: ' + ${el.getId()}"></h2>
+        <p th:text="'Фамилия: ' + ${el.getSurname()}"></p>
+        <p th:text="'Имя: ' + ${el.getName}"></p>
+        <p th:text="'Отчество: ' + ${el.getMiddleName()}"></p>
+        <p th:text="'Паспорт: ' + ${el.getPassport()}"></p>
+        <p th:text="'Дата рождения: ' + ${el.getBirthday()}"></p>
+            <a th:href="'/employee/edit/' + ${el.getId()}" class="btn btn-primary">Редактирование</a>
+            <a th:href="'/employee/delete/' + ${el.getId()}" class="btn btn-danger">Удаление</a>
+    </div>
+        <br>
+        <a th:href="'/employee'" class="btn btn-dark" style="margin-left: 10px">Назад</a>
+</div>
+</body>
+</html>

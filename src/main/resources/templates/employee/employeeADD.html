@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавление сотрудника</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <div th:insert="fragments/header :: headerMain"></div>
 </head>
-<body>
+<body style="background: lightgray">
+<div style="padding: 5px; margin-left: 5px">
     <form method="post">
         <label>
-            <input name="surname" type="text" placeholder="Фамилия"> <br>
-            <input name="name" type="text" placeholder="Имя"> <br>
-            <input name="middleName" type="text" placeholder="Отчество"> <br>
-            <input name="passport" type="number" min="1000000000" max="9999999999" placeholder="Паспорт"> <br>
-            <input name="birthday" type="text" placeholder="гггг-мм-дд"> <br><br>
+            <input name="surname" type="text" placeholder="Фамилия" class="form-control" style="min-width: 100px; width: 300px"> <br>
+            <input name="name" type="text" placeholder="Имя" class="form-control" style="min-width: 100px; width: 300px"> <br>
+            <input name="middleName" type="text" placeholder="Отчество" class="form-control" style="min-width: 100px; width: 300px"> <br>
+            <input name="passport" type="number" min="1000000000" max="9999999999" placeholder="Паспорт" class="form-control"style="min-width: 100px; width: 300px"> <br>
+            <input name="birthday" type="text" placeholder="гггг-мм-дд" class="form-control" style="min-width: 100px; width: 300px"> <br><br>
 
-            <input type="submit" value="Добавить сотрудника">
+            <input type="submit" value="Добавить сотрудника" class="btn btn-info">
         </label>
     </form>
+</div>
 
-    <a href="/employee">Отмена</a>
+    <a href="/employee" class="btn btn-dark" style="margin-left: 10px">Отмена</a>
 </body>
 </html>

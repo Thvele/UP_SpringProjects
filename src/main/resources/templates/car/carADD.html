@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавление машины</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <div th:insert="fragments/header :: headerMain"></div>
 </head>
-<body>
-  <form method="post">
-    <label>
-      <input name="carName" type="text" placeholder="Название"> <br>
-      <input name="carColor" type="text" placeholder="Цвет"> <br>
-      <input name="carKPPType" type="text" maxlength="1" placeholder="Тип коробка передач (м/а)"> <br>
-      <input name="carCost" type="number" placeholder="Цена"> <br>
-      <input name="carDelivery" type="text" placeholder="гггг-мм-дд"> <br><br>
+<body style="background: lightgray">
+  <div style="padding: 5px; margin-left: 5px">
+    <form method="post">
+      <label>
+        <input name="carName" type="text" placeholder="Название"  class="form-control" style="min-width: 100px; width: 300px"> <br>
+        <input name="carColor" type="text" placeholder="Цвет"  class="form-control" style="min-width: 100px; width: 300px"> <br>
+        <input name="carKPPType" type="text" maxlength="1" placeholder="Тип коробка передач (м/а)"  class="form-control" style="min-width: 100px; width: 300px"> <br>
+        <input name="carCost" type="number" placeholder="Цена"  class="form-control" style="min-width: 100px; width: 300px"> <br>
+        <input name="carDelivery" type="text" placeholder="гггг-мм-дд"  class="form-control" style="min-width: 100px; width: 300px"> <br><br>
 
-      <input type="submit" value="Добавить машину">
-    </label>
-  </form>
-
-  <a href="/car">Отмена</a>
+        <input type="submit" value="Добавить машину" class="btn btn-info">
+      </label>
+    </form>
+  </div>
+  <a href="/car" class="btn btn-dark" style="margin-left: 10px">Отмена</a>
 </body>
 </html>

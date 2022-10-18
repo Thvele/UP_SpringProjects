@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Редактирование + ${car.carName}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <div th:insert="fragments/header :: headerMain"></div>
+</head>
+<body style="background: lightgray">
+<div th:each="el: ${car}" style="padding: 5px; margin-left: 5px">
+    <form method="post">
+        <label>
+            <input name="carName" type="text" placeholder="Название" th:value="${car.carName}" class="form-control" style="min-width: 100px; width: 300px"><br>
+            <input name="carColor" type="text" placeholder="Цвет" th:value="${car.carColor}" class="form-control" style="min-width: 100px; width: 300px"> <br>
+            <input name="carKPPType" type="text" maxlength="1" placeholder="Тип коробка передач (м/а)" th:value="${car.carKPPType}" class="form-control" style="min-width: 100px; width: 300px"> <br>
+            <input name="carCost" type="number" placeholder="Цена" th:value="${car.carCost}" class="form-control" style="min-width: 100px; width: 300px"> <br>
+            <input name="carDelivery" type="text" placeholder="гггг-мм-дд" th:value="${car.carDelivery.toString().substring(0,10)}" maxlength="10" class="form-control" style="min-width: 100px; width: 300px"> <br><br>
+
+            <input type="submit" value="Подтвердить" class="btn btn-primary" style="margin-bottom: 5px">
+        </label>
+    </form>
+    <a th:href="'/car/details/' + ${el.id}" class="btn btn-dark">Назад</a>
+</div>
+</body>
+</html>
