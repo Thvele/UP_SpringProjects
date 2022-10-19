@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление цвета машины</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<div th:insert="fragments/header :: headerMain"></div>
+<body style="background: lightgray">
+    <div style="padding: 5px; margin-left: 5px">
+        <form method="post">
+            <div class="form-floating">
+                <input name="main" id="input_mainC" type="text" placeholder="Основной цвет" class="form-control" style="min-width: 100px; width: 300px">
+                <label for="input_mainC">Основной цвет</label>
+            </div>
+            <div class="form-floating">
+                <input name="sub" id="input_subC" type="text" placeholder="Дополнительный цвет" class="form-control" style="min-width: 100px; width: 300px">
+                <label for="input_subC">Дополнительный цвет</label>
+            </div>
+
+            <input type="submit" value="Добавить цвет" class="btn btn-info">
+        </form>
+    </div>
+</body>
+</html>

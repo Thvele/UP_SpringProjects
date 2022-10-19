@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление машины</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<div th:insert="fragments/header :: headerMain"></div>
+<body style="background: lightgray">
+  <div style="padding: 5px; margin-left: 5px">
+    <form method="post">
+      <label>
+          <div class="form-floating">
+              <input name="carName" id="input_carName" type="text" placeholder="Наименование авто" class="form-control" style="min-width: 100px; width: 300px">
+              <label for="input_carName">Наименование авто</label>
+          </div>
+          <div class="form-floating">
+              <input name="carCost" id="input_carCost" type="number" min="1" max="999999999" placeholder="Цена" class="form-control" style="min-width: 100px; width: 300px">
+              <label for="input_carCost">Цена</label>
+          </div>
+
+          <div class="form-floating" style="min-width: 100px; width: 300px">
+              <select name="carColor" class="form-select" aria-label="Цвет" id="color_select">
+                  <div th:each="el : ${colors}">
+                      <option th:text="${el.mainColor} + '|' + ${el.subColor}"></option>
+                  </div>
+              </select>
+              <label for="color_select">Цвет</label>
+          </div>
+
+          <div class="form-floating" style="min-width: 100px; width: 300px">
+              <select name="carReg" class="form-select" aria-label="Регистрация" id="reg_select">
+                  <div th:each="el : ${regs}">
+                      <option th:text="${el.sign}"></option>
+                  </div>
+              </select>
+              <label for="reg_select">Регистрация</label>
+          </div>
+
+        <input type="submit" value="Добавить машину" class="btn btn-info">
+      </label>
+    </form>
+  </div>
+</body>
+</html>

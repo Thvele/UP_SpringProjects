@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить регистрацию</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<div th:insert="fragments/header :: headerMain"></div>
+<body style="background: lightgray">
+    <div style="padding: 5px; margin-left: 5px">
+        <form method="post">
+            <div class="form-floating">
+                <input name="sign" id="input_sign" type="text" placeholder="Рег. знак (9 символов)" maxlength="9" class="form-control" style="min-width: 100px; width: 300px">
+                <label for="input_sign">Рег. знак</label>
+            </div>
+            <div class="form-floating">
+                <input name="VIN" id="input_VIN" type="text" placeholder="VIN (17 символов)" maxlength="17" class="form-control" style="min-width: 100px; width: 300px">
+                <label for="input_VIN">VIN</label>
+            </div>
+
+            <input type="submit" value="Добавить регистрацию" class="btn btn-info">
+        </form>
+    </div>
+</body>
+</html>

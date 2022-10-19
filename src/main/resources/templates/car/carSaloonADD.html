@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Присвоить салон машине</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<div th:insert="fragments/header :: headerMain"></div>
+<body style="background: lightgray">
+    <div style="padding: 5px; margin-left: 5px">
+        <form method="post">
+            <div class="form-floating" style="min-width: 100px; width: 300px">
+                <select name="car_name" class="form-select" aria-label="Машина" id="car_select">
+                    <div th:each="el : ${cars}">
+                        <option th:text="${el.Id} + '| ' + ${el.carName}"></option>
+                    </div>
+                </select>
+                <label for="car_select">Машина</label>
+            </div>
+
+            <div class="form-floating" style="min-width: 100px; width: 300px">
+                <select name="saloon_name" class="form-select" aria-label="Салон" id="saloon_select">
+                    <div th:each="el : ${saloons}">
+                        <option th:text="${el.Id} + '| ' + ${el.name}"></option>
+                    </div>
+                </select>
+                <label for="saloon_select">Салон</label>
+            </div>
+
+            <input type="submit" value="Добавить салон" class="btn btn-info">
+        </form>
+    </div>
+</body>
+</html>

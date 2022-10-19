@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/header :: headerMain"></div>
+    <div>
+        <h1 style="text-align: center">Таблица машин</h1>
+        <div class="row">
+            <div class="col" style="border:1px solid gray;"><h3>ID</h3></div>
+            <div class="col" style="border:1px solid gray;">Наименование авто</div>
+            <div class="col" style="border:1px solid gray;">Регистрация</div>
+            <div class="col" style="border:1px solid gray;">Цена</div>
+            <div class="col" style="border:1px solid gray;">Цвет</div>
+            <div class="col" style="border:1px solid gray;">Автосалоны</div>
+        </div>
+        <div class="row" th:each="el: ${list_cars}">
+            <div class="col" style="border:1px solid gray;"><h3 th:text="${el.getId()}" ></h3></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getCarName()}"></p></div>
+            <div class="col" th:each="el1: ${el.getRegistration()}" style="border:1px solid gray;">
+                <p th:text="'Рег. знак: ' + ${el1.getSign()}"></p>
+                <p th:text="'VIN номер: ' + ${el1.getVIN()}"></p>
+            </div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getCarCost()} + ' руб.'"></p></div>
+            <div class="col" th:each="el1: ${el.getCarColor()}" style="border:1px solid gray;">
+                <p th:text="'Основной цвет: ' + ${el1.getMainColor()}"></p>
+                <p th:text="'Дополнительный цвет: ' + ${el1.getSubColor()}"></p>
+            </div>
+            <div class="col" style="border:1px solid gray;">
+                <div th:each="el1: ${el.getSaloons()}">
+                    <p th:text="'Адрес: ' + ${el1.getAddress()}"></p>
+                    <p th:text="'Название: ' + ${el1.getName()}"></p> <br>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        <h1 style="text-align: center">Таблица автосалонов</h1>
+        <div class="row">
+            <div class="col" style="border:1px solid gray;"><h3>ID</h3></div>
+            <div class="col" style="border:1px solid gray;">Адрес</div>
+            <div class="col" style="border:1px solid gray;">Название</div>
+        </div>
+        <div class="row" th:each="el: ${list_saloons}">
+            <div class="col" style="border:1px solid gray;"><h3 th:text="${el.getId()}" ></h3></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getAddress()}"></p></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getName()}"></p></div>
+        </div>
+        <br><br>
+
+        <h1 style="text-align: center">Таблица цветов</h1>
+        <div class="row">
+            <div class="col" style="border:1px solid gray;"><h3>ID</h3></div>
+            <div class="col" style="border:1px solid gray;">Основной цвет</div>
+            <div class="col" style="border:1px solid gray;">Дополнительный цвет</div>
+        </div>
+        <div class="row" th:each="el: ${list_carColors}">
+            <div class="col" style="border:1px solid gray;"><h3 th:text="${el.getId()}" ></h3></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getMainColor()}"></p></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getSubColor()}"></p></div>
+        </div>
+        <br><br>
+
+        <h1 style="text-align: center">Таблица регистраций</h1>
+        <div class="row">
+            <div class="col" style="border:1px solid gray;"><h3>ID</h3></div>
+            <div class="col" style="border:1px solid gray;">Рег. знак</div>
+            <div class="col" style="border:1px solid gray;">VIN номер</div>
+        </div>
+        <div class="row" th:each="el: ${list_carReg}">
+            <div class="col" style="border:1px solid gray;"><h3 th:text="${el.getId()}" ></h3></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getSign()}"></p></div>
+            <div class="col" style="border:1px solid gray;"><p th:text="${el.getVIN()}"></p></div>
+        </div>
+        <br><br>
+    </div>
+
+</body>
+</html>
