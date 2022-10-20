@@ -14,6 +14,14 @@
           <li><a href="/car/add" class="nav-link px-2 text-secondary">Добавить машину</a></li>
           <li><a href="/employee/add" class="nav-link px-2 text-secondary">Добавить сотрудника</a></li>
         </ul>
+
+        <ul>
+          <li><a href="/login" class="nav-link px-2 text-secondary">Авторизация</a></li>
+          <li><a href="/registration" class="nav-link px-2 text-secondary">Регистрация</a></li>
+          <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Выйти"/>
+          </form>
+        </ul>
       </div>
     </div>
   </header>
