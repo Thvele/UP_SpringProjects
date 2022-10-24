@@ -8,31 +8,11 @@
     <div th:insert="fragments/header :: headerMain"></div>
 </head>
 <body style="background: lightgray">
-
-  <form class="row g-3" style="margin-left: 5px; margin-top: 10px" action="/car/filterACCU" method="get">
-      <div class="col-auto">
-          <input name="search" type="text" class="form-control" placeholder="Точный поиск машин" style="width: 300px">
-      </div>
-      <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3">Найти</button>
-      </div>
-  </form>
-
-  <form class="row g-3" style="margin-left: 5px" action="/car/filter" method="get">
-      <div class="col-auto">
-          <input name="search" type="text" class="form-control" placeholder="Неточный поиск машин" style="width: 300px">
-      </div>
-      <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3">Найти</button>
-      </div>
-  </form>
-
   <div style="padding: 5px; margin-left: 5px">
     <div th:each="el: ${list_cars}">
       <h2 th:text="'ID: ' + ${el.getId()}"></h2>
       <p th:text="'Название машины: ' + ${el.getCarName()}"></p>
       <p th:text="'Цена: ' + ${el.getCarCost()} + ' руб.'"></p>
-      <a th:href="'/car/details/' + ${el.getId()}" class="btn btn-info">Подробнее</a>
     </div>
   </div>
 </body>

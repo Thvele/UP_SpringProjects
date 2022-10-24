@@ -8,30 +8,12 @@
     <div th:insert="fragments/header :: headerMain"></div>
 </head>
 <body style="background: lightgray">
-
-    <form class="row g-3" style="margin-left: 5px; margin-top: 10px" action="/car/filterACCU" method="get">
-        <div class="col-auto">
-            <input name="search" type="text" class="form-control" placeholder="Точный поиск фамилии" style="width: 300px">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Найти</button>
-        </div>
-    </form>
-
-    <form class="row g-3" style="margin-left: 5px" action="/car/filter" method="get">
-        <div class="col-auto">
-            <input name="search" type="text" class="form-control" placeholder="Неточный поиск фамилии" style="width: 300px">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Найти</button>
-        </div>
-    </form>
-
     <div style="padding: 5px; margin-left: 5px">
         <div th:each="el: ${list_employee}">
             <h2 th:text="'ID: ' + ${el.getId()}"></h2>
             <p th:text="'ФИО: ' + ${el.getSurname()} + ' ' + ${el.getName} + ' '     + ${el.getMiddleName()}"></p>
-            <a th:href="'/employee/details/' + ${el.getId()}" class="btn btn-info">Подробнее</a>
+            <p th:text="'Роли: ' + ${el.getRoles()}"></p>
+            <a th:href="'/employee/editR/' + ${el.getId()}" class="btn btn-info">Изменить роли</a>
         </div>
     </div>
     </body>

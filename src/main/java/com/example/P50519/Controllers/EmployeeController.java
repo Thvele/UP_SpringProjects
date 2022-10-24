@@ -1,8 +1,10 @@
 package com.example.P50519.Controllers;
 
 import com.example.P50519.Models.Employee;
+import com.example.P50519.Models.Role;
 import com.example.P50519.Repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/employee")
+@PreAuthorize("hasAnyAuthority('HRdep')")
 public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
@@ -91,5 +94,37 @@ public class EmployeeController {
         employeeRepository.save(employee);
 
         return("redirect:/employee/details/" + employee.getId());
+    }
+
+    @GetMapping("/editR/{id}")
+    public String EmployeeRoleEdit(Model model,
+                               @PathVariable long id) {
+
+        Employee employee = employeeRepository.findById(id).orElseThrow();
+        model.addAttribute("employee", employee);
+        model.addAttribute("listRoles", Role.values());
+        return("/employee/emoloyeeRoleEDIT");
+    }
+
+    @PostMapping("/editR/{id}")
+    public String EmployeeRoleEdit(@RequestParam long id,
+                                   @RequestParam String name,
+                                   @RequestParam String surname,
+                                   @RequestParam String middleName,
+                                   @RequestParam String[] roles) {
+
+        Employee employee = employeeRepository.findById(id).orElseThrow();
+        employee.setName(name);
+        employee.setSurname(surname);
+        employee.setMiddleName(middleName);
+        employee.getRoles().clear();
+
+        for(String role: roles){
+            employee.getRoles().add(Role.valueOf(role));
+        }
+
+        employeeRepository.save(employee);
+
+        return("redirect:/employee");
     }
 }
