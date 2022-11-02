@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Регистрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body class="text-center text-bg-dark" style="font-family: 'Century Gothic'; width: 500px; margin-right: auto; margin-left: auto; margin-top: 230px">
+
+<main class="form-signin w-100 m-auto">
+
+    <span class="fs-1" style="color: rebeccapurple; font-weight: bold;">localhost:8080</span>
+    <br>
+
+    <div class="mb-3">
+        <div>
+            <p style="color: indianred; font-weight: bold" th:if="${error}">Пользователь с таким логином уже существует!</p>
+        </div>
+    </div>
+
+    <form th:object="${user}" action="/registration" method="post">
+        <div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="loginSpan" style="width: 120px">Логин*</span>
+                <input th:field="*{login}" name="login" type="text" class="form-control bg-dark" placeholder="Логин" aria-label="Логин" aria-describedby="loginSpan" style="color: white;" minlength="4" maxlength="20" required>
+            </div>
+            <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}" style="color: indianred;"></div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="passwordSpan" style="width: 120px">Пароль*</span>
+                <input th:field="*{password}" name="password" type="password" class="form-control bg-dark" placeholder="Пароль" aria-label="Пароль" aria-describedby="passwordSpan" style="color: white" minlength="8" required>
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: indianred;"></div>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">ФИО</span>
+            <input id="input-F" type="text" aria-label="Фамилия" placeholder="Фамилия*" class="form-control bg-dark" style="color: white" th:value="${fam}" required>
+            <input id="input-I" type="text" aria-label="Имя" placeholder="Имя*" class="form-control bg-dark" style="color: white" th:value="${im}" required>
+            <input id="input-O" type="text" aria-label="Отчество" placeholder="Отчество" class="form-control bg-dark" th:value="${ot}" style="color: white">
+        </div>
+        <div class="input-group mb-3 text-center">
+            <div class="form-check m-auto">
+                <input class="form-check-input" type="radio" value="1" name="idgender" required>
+                <label class="form-check-label">Мужской пол</label>
+            </div>
+            <div class="form-check m-auto">
+                <input class="form-check-input" type="radio" value="2" name="idgender" required>
+                <label class="form-check-label">Женский пол</label>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="emailSpan" style="width: 120px">Почта*</span>
+            <input name="email" type="email" class="form-control bg-dark" placeholder="example@ex.com" aria-label="Почта" aria-describedby="emailSpan" style="color: white" th:value="${em}" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="phoneSpan" style="width: 120px">Тел. номер</span>
+            <input name="phone" type="tel" pattern="[+]{1}7[0-9]{10}" class="form-control bg-dark" maxlength="12" minlength="12" placeholder="+79999999999" aria-label="Тел. номер" aria-describedby="phoneSpan" style="color: white" th:value="${ph}" required>
+        </div>
+        <input id="input-FIO" name="FIO" type="text" style="visibility: hidden; width: 1px; height: 1px;">
+        <br>
+
+        <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Регистрация</button>
+    </form>
+
+    <a href="/login" class="btn btn-dark">Назад</a>
+
+    <p class="mt-5 mb-3 text-muted">© 2022</p>
+
+</main>
+</body>
+</html>
+
+<script>
+    var iF = document.getElementById("input-F");
+    var iI = document.getElementById("input-I");
+    var iO = document.getElementById("input-O");
+    var iFIO = document.getElementById("input-FIO");
+
+    window.onload = function (){
+        iFIO.value = iF.value + " " + iI.value + " " + iO.value;
+    }
+
+    iF.onchange = function(){
+        iFIO.value = iF.value + " " + iI.value + " " + iO.value;
+    }
+    iI.onchange = function(){
+        iFIO.value = iF.value + " " + iI.value + " " + iO.value;
+    }
+    iO.onchange = function(){
+        iFIO.value = iF.value + " " + iI.value + " " + iO.value;
+    }
+</script>

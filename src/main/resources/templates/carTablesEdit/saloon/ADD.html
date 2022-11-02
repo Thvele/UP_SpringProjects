@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление салона</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body class="text-bg-dark" style="font-family: 'Century Gothic'">
+<div class="cover-container p-3 flex-column">
+
+    <main class="px-3">
+        <div class="row" style="margin-bottom: 15px">
+            <div class="row">
+                <div class="col-md-auto">
+                    <form method="post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="nameSpan">Наименование</span>
+                            <input name="saloonname" type="text" class="form-control bg-dark" aria-label="Наименование" aria-describedby="nameSpan" style="color: white" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="addressSpan">Адрес</span>
+                            <input name="saloonaddress" type="text" class="form-control bg-dark" aria-label="Адрес" aria-describedby="addressSpan" style="color: white" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Добавить</button>
+                    </form>
+                    <a href="/saloon" class="btn btn-dark">Назад</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

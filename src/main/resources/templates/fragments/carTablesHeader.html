@@ -1,0 +1,28 @@
+<div th:fragment="header" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+        <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <span class="fs-4" style="color: rebeccapurple; font-weight: bold">localhost:8080</span>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" sec:authorize="hasAnyAuthority('ADMIN', 'REDACTOR')">
+            <li><a href="/transmission" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Тип КП</a></li>
+            <li><a href="/saloon" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Салоны</a></li>
+            <li><a href="/fuelType" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Типы топлива</a></li>
+            <li><a href="/driveType" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Типы привода</a></li>
+            <li><a href="/color" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Цвета </a></li>
+            <li><a href="/carType" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Типы кузова</a></li>
+            <li><a href="/carSaloon" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Салоны с машинами</a></li>
+            <li><a href="/car" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Машины</a></li>
+            <li><a href="/carPhoto" class="nav-link px-2 text-white" style="font-weight: bold; font-size: 16px">Фото машин</a></li>
+        </ul>
+
+        <div class="nav text-end">
+          <li><a href="/" class="btn btn-outline-info me-2" style="color: cornflowerblue; font-weight: bold; font-size: 16px">Назад</a></li>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование цвета</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body class="text-bg-dark" style="font-family: 'Century Gothic'">
+<div class="cover-container p-3 flex-column">
+
+    <main class="px-3">
+        <div class="row" th:each="el: ${object}" style="margin-bottom: 15px">
+            <div class="row">
+                <div class="col-md-auto">
+                    <form method="post">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="mainSpan">Основной цвет</span>
+                            <input name="colormain" type="text" class="form-control bg-dark" aria-label="Основной цвет" aria-describedby="mainSpan" th:value="${el.colormain}" style="color: white" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="subSpan">Дополнительный цвет</span>
+                            <input name="colorsub" type="text" class="form-control bg-dark" aria-label="Дополнительный цвет" aria-describedby="subSpan" th:value="${el.colorsub}" style="color: white" required>
+                        </div>
+
+                        <div class="form-floating mb-3" style="min-width: 100px; width: 300px">
+                            <select name="colorType_" id="select-iddrive" class="form-select bg-dark" style="color: white" aria-label="Вид цвета">
+                                <div th:each="el : ${colorTypes}">
+                                    <option th:text="${el.colorType}"></option>
+                                </div>
+                            </select>
+                            <label for="select-iddrive">Вид цвета</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                    </form>
+                    <a href="/color" class="btn btn-dark">Назад</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
